@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from './UserContext';
 import logo from '../../assets/logo.png';
 import { MdOutlineSearch } from 'react-icons/md';
 import { FaCartShopping } from 'react-icons/fa6';
@@ -7,6 +8,12 @@ import DarkMode from './DarkMode';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ handleOrderPopup, handleLoginPopup }) => {
+  const { user, isLoading } = useContext(UserContext);
+
+  if (isLoading) return <div>Loading...</div>;
+  console.log('User:', user);
+  console.log('Is Admin:', user && user.isAdmin);
+
   return (
     <div className='shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40'>
       {/* upper Navbar */}
@@ -42,6 +49,14 @@ const Navbar = ({ handleOrderPopup, handleLoginPopup }) => {
             <div>
               <DarkMode />
             </div>
+            {/* Add Products button */}
+            {user && user.isAdmin && (
+              <Link to="/add-products">
+                <button className='bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full ml-4'>
+                  Add Products
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

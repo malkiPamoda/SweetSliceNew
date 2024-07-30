@@ -5,12 +5,13 @@ const { User } = require('../models/User')
 // Get all users
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find().select('-password')
-        res.send(users)
+        const users = await User.find().select('-password');
+        res.send(users);
     } catch (error) {
-        res.status(500).send('Server Error')
+        console.error('Error fetching users:', error);
+        res.status(500).send('Server Error');
     }
-})
+});
 
 //Update users
 router.put('/:id', async (req, res) => {

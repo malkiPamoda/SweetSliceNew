@@ -8,6 +8,7 @@ import Footer from './pages/Footer/Footer';
 import Popup from './pages/Popup/Popup';
 import Login from './pages/Login';
 import RegisterPopUp from './pages/RegisterPopup';
+import { UserProvider } from './component/Navbar/UserContext'; 
 
 const App = () => {
   const [orderPopup, setOrderPopup] = React.useState(false);
@@ -38,20 +39,22 @@ const App = () => {
 
   return (
     <div className='bg-white dark:bg-gray-800 dark:text-white duration-200'>
-      <Router>
-        <Navbar 
-          handleOrderPopup={handleOrderPopup} 
-          handleLoginPopup={handleLoginPopup} 
-          handleRegisterPopup={handleRegisterPopup}  
-        />
-        <Routes>
-          <Route path="/" element={<Home handleOrderPopup={handleOrderPopup} />} />
-        </Routes>
-        <Footer />
-        <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
-        <Login loginPopup={loginPopup} setLoginPopup={setLoginPopup} handleRegisterPopup={handleRegisterPopup} />
-        <RegisterPopUp registerPopup={registerPopup} setRegisterPopup={setRegisterPopup}/>
-      </Router>
+      <UserProvider>
+        <Router>
+          <Navbar 
+            handleOrderPopup={handleOrderPopup} 
+            handleLoginPopup={handleLoginPopup} 
+            handleRegisterPopup={handleRegisterPopup}  
+          />
+          <Routes>
+            <Route path="/" element={<Home handleOrderPopup={handleOrderPopup} />} />
+          </Routes>
+          <Footer />
+          <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />
+          <Login loginPopup={loginPopup} setLoginPopup={setLoginPopup} handleRegisterPopup={handleRegisterPopup} />
+          <RegisterPopUp registerPopup={registerPopup} setRegisterPopup={setRegisterPopup} />
+        </Router>
+      </UserProvider>
     </div>
   );
 };
