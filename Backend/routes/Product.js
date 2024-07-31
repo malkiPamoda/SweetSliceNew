@@ -4,6 +4,8 @@ const router = express.Router()
 const upload = require('../multer-config')
 const Joi = require('joi')
 
+const normalizePath = (path) => path.replace(/\\/g, '/')
+
 // Create products
 router.post('/', upload.single('image'), async (req, res) => {
     try {
@@ -16,7 +18,7 @@ router.post('/', upload.single('image'), async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            image: req.file.path  // Save image path to database
+            image: normalizePath(req.file.path)  // Save image path to database
         })
 
         await product.save()

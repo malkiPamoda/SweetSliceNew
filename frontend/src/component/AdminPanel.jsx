@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import UserContext from './UserContext';
 import ProductForm from './ProductForm';
 import ProductList from './ProductList';
+import ProductContainer from './ProductContainer';
 
 const AdminPanel = () => {
   const { user, isLoading } = useContext(UserContext);
@@ -30,6 +31,7 @@ const AdminPanel = () => {
       <h1>Admin Panel</h1>
       <ProductForm addProduct={addProduct} />
       <ProductList products={products} deleteProduct={deleteProduct} updateProduct={updateProduct} />
+      <ProductContainer /> 
     </div>
   );
 };
