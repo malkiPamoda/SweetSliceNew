@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import axios from "axios";
 
 const Login = ({ loginPopup, setLoginPopup, handleRegisterPopup }) => {
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  })
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    try {
+      const { email, password } = values
+      const response = await axios.post("http://localhost:3000/api/login", {
+        email,
+        password
+      })
+      const token = response.headers["x-auth-token"]
+      l
+    } catch (error) {
+      
+    }
+  }
+
+  const handleChange = (e) => {
+    setValues({...values, [e.target.name]: e.target.value })
+  }
+  
   return (
     <>
       {loginPopup && (
@@ -19,17 +44,21 @@ const Login = ({ loginPopup, setLoginPopup, handleRegisterPopup }) => {
               {/* form section */}
               <div>
                 <input
+                  name='email'
+                  onChange={handleChange}
                   type='email'
                   placeholder='Enter Your Email'
                   className='w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4'
                 />
                 <input
+                  name='password'
+                  onChange={handleChange}
                   type='password'
                   placeholder='Enter Your Password'
                   className='w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-2 py-1 mb-4'
                 />
                 <div className='flex justify-center'>
-                  <button className='bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full mr-2'>
+                  <button onClick={handleLogin} className='bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full mr-2'>
                     Log In
                   </button>
                   <button

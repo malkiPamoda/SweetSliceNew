@@ -10,7 +10,9 @@ const purchaseItems = require('./routes/PurchaseItems')
 const users = require('./routes/Users')
 
 const app = express()
-app.use(cors())
+app.use(cors({
+    exposedHeaders: ['x-auth-token']
+}));
 app.use(express.json())
 
 app.use('/api/signup', signup)
