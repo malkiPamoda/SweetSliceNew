@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import UserContext from './UserContext';
+import UserContext from '../UserContext';
 import logo from '../../assets/logo.png';
 import { MdOutlineSearch } from 'react-icons/md';
 import { FaCartShopping } from 'react-icons/fa6';

@@ -8,7 +8,9 @@ import Footer from './pages/Footer/Footer';
 import Popup from './pages/Popup/Popup';
 import Login from './pages/Login';
 import RegisterPopUp from './pages/RegisterPopup';
-import { UserProvider } from './component/Navbar/UserContext'; 
+import { UserProvider} from './component/UserContext'; 
+import AdminPanel from './component/AdminPanel'; // Import AdminPanel component
+import ProtectedRoute from './component/ProtectedRoute'; // Import ProtectedRoute component
 
 const App = () => {
   const [orderPopup, setOrderPopup] = React.useState(false);
@@ -48,6 +50,7 @@ const App = () => {
           />
           <Routes>
             <Route path="/" element={<Home handleOrderPopup={handleOrderPopup} />} />
+            <Route path="/admin" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} /> {/* Protected Route for Admin Panel */}
           </Routes>
           <Footer />
           <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />

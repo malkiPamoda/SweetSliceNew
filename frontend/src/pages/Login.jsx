@@ -22,11 +22,17 @@ const Login = ({ loginPopup, setLoginPopup, handleRegisterPopup }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-
       const response = await axios.post('http://localhost:3000/api/login', formData);
       console.log('Login successful:', response.data);
+  
+ 
+      const { token } = response.data;
+  
+    
+      localStorage.setItem('x-auth-token', token);
+  
       setSuccessMessage('Login successful!');
       setLoginPopup(false);
     } catch (err) {
