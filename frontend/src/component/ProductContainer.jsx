@@ -5,7 +5,7 @@ import ProductList from './ProductList';
 const ProductContainer = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
-  const baseUrl = '../../../Backend'
+  const baseUrl = "http://localhost:3000/"
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -35,11 +35,11 @@ const ProductContainer = () => {
   const updateProduct = async (id, updatedProductData) => {
     try {
       const formData = new FormData();
-      formData.append('name', updatedProductData.name);
-      formData.append('description', updatedProductData.description);
-      formData.append('price', parseFloat(updatedProductData.price)); 
-      if (updatedProductData.image) {
-        formData.append('image', updatedProductData.image);
+      formData.append('name', updatedProductData.get("name"));
+      formData.append('description', updatedProductData.get("description"));
+      formData.append('price', parseFloat(updatedProductData.get("price")));
+      if (updatedProductData.get("image")) {
+        formData.append('image', updatedProductData.get("image"));
       }
 
       const response = await axios.put(`http://localhost:3000/api/dashboard/products/${id}`, formData, {
@@ -55,13 +55,15 @@ const ProductContainer = () => {
     }
   };
 
+  console.log(products)
+
   return (
     <div>
       {error && <p className='text-red-500'>{error}</p>}
       <ProductList
         products={products.map(product => ({
           ...product,
-          img: `${baseUrl}/${product.img}` // Construct full URL for the image
+          image: baseUrl + product.image?.replace("uploads/", "") // Construct full URL for the image
         }))}
         deleteProduct={deleteProduct}
         updateProduct={updateProduct}

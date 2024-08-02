@@ -57,7 +57,7 @@ const ProductList = ({ products, deleteProduct, updateProduct }) => {
     }
 
     try {
-      await updateProduct(selectedProduct.id, updatedProductData);
+      await updateProduct(selectedProduct._id, updatedProductData);
       setSuccessMessage('Product updated successfully!');
       setSelectedProduct(null);
     } catch (err) {
@@ -71,12 +71,12 @@ const ProductList = ({ products, deleteProduct, updateProduct }) => {
       <h2>Product List</h2>
       <ul>
         {products.map((product) => (
-          <li key={product.id} style={productItemStyle}>
+          <li key={product._id} style={productItemStyle}>
             <h3>{product.name}</h3>
             <p>{product.description}</p>
             <p>{product.price}</p>
             <img src={product.image} alt={product.name} style={productImgStyle} />
-            <button onClick={() => deleteProduct(product.id)}>Delete</button>
+            <button onClick={() => deleteProduct(product._id)}>Delete</button>
             <button onClick={() => handleUpdate(product)}>Update</button>
           </li>
         ))}

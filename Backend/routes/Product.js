@@ -4,7 +4,7 @@ const router = express.Router()
 const upload = require('../multer-config')
 const Joi = require('joi')
 
-const normalizePath = (path) => path.replace(/\\/g, '/')
+const normalizePath = (path) => path ? path.replace(/\\/g, '/') : null
 
 // Create products
 router.post('/', upload.single('image'), async (req, res) => {
@@ -48,7 +48,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            image: normalizePath(req.file.path)
+            image: normalizePath(req.file?.path)
         }, { new: true })
         if (!product) return res.status(404).send('Product not found')
 

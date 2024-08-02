@@ -8,10 +8,13 @@ const product = require('./routes/Product')
 const cart = require('./routes/Cart')
 const purchaseItems = require('./routes/PurchaseItems')
 const users = require('./routes/Users')
+const path = require("path")
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+
+app.use(express.static(path.join(__dirname, "uploads")))
 
 app.use('/api/signup', signup)
 app.use('/api/login', login)
