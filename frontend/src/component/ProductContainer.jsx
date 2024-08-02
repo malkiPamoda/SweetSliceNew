@@ -11,6 +11,7 @@ const ProductContainer = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/dashboard/products');
+        console.log('Fetched products:', response.data);
         setProducts(response.data);
       } catch (err) {
         console.error('Error fetching products:', err.response?.data || err.message);
@@ -31,10 +32,23 @@ const ProductContainer = () => {
     }
   };
 
-  const updateProduct = async (updatedProduct) => {
+  const updateProduct = async (id, updatedProductData) => {
     try {
-      const response = await axios.put(`http://localhost:3000/api/dashboard/products/${updatedProduct.id}`, updatedProduct);
-      setProducts(products.map(product => product.id === updatedProduct.id ? response.data : product));
+      const formData = new FormData();
+      formData.append('name', updatedProductData.name);
+      formData.append('description', updatedProductData.description);
+      formData.append('price', parseFloat(updatedProductData.price)); 
+      if (updatedProductData.image) {
+        formData.append('image', updatedProductData.image);
+      }
+
+      const response = await axios.put(`http://localhost:3000/api/dashboard/products/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      setProducts(products.map(product => product.id === id ? response.data : product));
     } catch (err) {
       console.error('Error updating product:', err.response?.data || err.message);
       setError('Failed to update product. Please try again.');
@@ -47,7 +61,7 @@ const ProductContainer = () => {
       <ProductList
         products={products.map(product => ({
           ...product,
-          img: `${baseUrl}/${product.image}` // Construct full URL for the image
+          img: `${baseUrl}/${product.img}` // Construct full URL for the image
         }))}
         deleteProduct={deleteProduct}
         updateProduct={updateProduct}

@@ -51,7 +51,7 @@ const Navbar = ({ handleOrderPopup, handleLoginPopup }) => {
             </div>
             {/* Add Products button */}
             {user && user.isAdmin && (
-              <Link to="/add-products">
+              <Link to="admin">
                 <button className='bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full ml-4'>
                   Add Products
                 </button>

@@ -48,7 +48,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            image: req.file.path
+            image: normalizePath(req.file.path)
         }, { new: true })
         if (!product) return res.status(404).send('Product not found')
 
