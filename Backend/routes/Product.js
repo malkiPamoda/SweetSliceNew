@@ -6,7 +6,7 @@ const Joi = require('joi')
 
 const normalizePath = (path) => path ? path.replace(/\\/g, '/') : null
 
-// Create products
+
 router.post('/', upload.single('image'), async (req, res) => {
     try {
         const { error } = validate(req.body)
@@ -18,7 +18,7 @@ router.post('/', upload.single('image'), async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            image: normalizePath(req.file.path)  // Save image path to database
+            image: normalizePath(req.file.path)  
         })
 
         await product.save()
