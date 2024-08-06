@@ -1,103 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import image1 from "../../assets/Menu/image01.jpg";
-import image2 from "../../assets/Menu/image2.jpg";
-import image3 from "../../assets/Menu/image3.jpg";
-import image4 from "../../assets/Menu/image4.jpg";
-import image5 from "../../assets/Menu/image5.jpg";
-import image6 from "../../assets/Menu/image6.jpg";
-import image7 from "../../assets/Menu/image7.jpg";
-import image8 from "../../assets/Menu/image8.jpg";
-import image9 from "../../assets/Menu/image9.jpg";
-import image10 from "../../assets/Menu/image10.jpg";
+import { useNavigate } from 'react-router-dom';
 
-const staticProducts = [
-  {
-    id: 1,
-    image: image1,
-    title: "Birthday Cake-Butter",
-    price: "$20",
-    aosDelay: "0",
-  },
-  {
-    id: 2,
-    image: image2,
-    title: "Birthday Cake-Chocolate",
-    price: "$20",
-    aosDelay: "200",
-  },
-  {
-    id: 3,
-    image: image3,
-    title: "Wedding Cake",
-    price: "$20",
-    aosDelay: "400",
-  },
-  {
-    id: 4,
-    image: image4,
-    title: "Wedding Cake",
-    price: "$20",
-    aosDelay: "600",
-  },
-  {
-    id: 5,
-    image: image5,
-    title: "Birthday Cake-Chocolate",
-    price: "$20",
-    aosDelay: "800",
-  },
-  {
-    id: 6,
-    image: image6,
-    title: "Wedding Cake",
-    price: "$20",
-    aosDelay: "0",
-  },
-  {
-    id: 7,
-    image: image7,
-    title: "Birthday Cake-Chocolate",
-    price: "$20",
-    aosDelay: "200",
-  },
-  {
-    id: 8,
-    image: image8,
-    title: "Cup Cake-Chocolate",
-    price: "$20",
-    aosDelay: "400",
-  },
-  {
-    id: 9,
-    image: image9,
-    title: "Birthday Cake-Butter",
-    price: "$20",
-    aosDelay: "600",
-  },
-  {
-    id: 10,
-    image: image10,
-    title: "Birthday Cake-Chocolate",
-    price: "$20",
-    aosDelay: "800",
-  },
-];
 
 const baseUrl = 'http://localhost:3000/'; // Replace with your actual base URL
 
-function Menu({ handleOrderPopup }) {
-  const [products, setProducts] = useState(staticProducts);
+function Menu() {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${baseUrl}api/dashboard/products`); // Replace with your backend URL
+        const response = await fetch(`${baseUrl}api/dashboard/products`);
         const data = await response.json();
+        console.log('Fetched products:', data); // Check the structure here
         const updatedData = data.map(product => ({
           ...product,
-          img: baseUrl + product.image?.replace("uploads/", "") // Construct full URL for the image
+          img: baseUrl + product.image?.replace("uploads/", "")
         }));
-        setProducts([...staticProducts, ...updatedData]);
+        setProducts(updatedData);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -106,6 +27,14 @@ function Menu({ handleOrderPopup }) {
     fetchProducts();
   }, []);
 
+  const handleOrderPopup = (_id) => {
+    if (_id) {
+      console.log(`Navigating to product with ID: ${_id}`);
+      navigate(`/product-view/${_id}`);
+    } else {
+      console.error('Invalid product ID');
+    }
+  };
 
   return (
     <section id="menu">
@@ -138,8 +67,8 @@ function Menu({ handleOrderPopup }) {
                       <h3 className='font-semibold mt-2'>{product.name}</h3>
                       <p className='text-sm text-primary mt-2'>{product.price}</p>
                       <div data-aos="fade-up" className='mt-2'>
-                        <button
-                          onClick={() => handleOrderPopup()}
+                      <button
+                         onClick={() => handleOrderPopup(product._id)}
                           className='cursor-pointer bg-primary text-white py-1 px-5 rounded-md'>
                           Order Now
                         </button>
