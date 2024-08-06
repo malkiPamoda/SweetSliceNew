@@ -18,7 +18,9 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.25.0",
     "react-slick": "^0.30.2",
-    "slick-carousel": "^1.8.1"
+    "selenium-webdriver": "^4.23.0",
+    "slick-carousel": "^1.8.1",
+    "webdriver-manager": "^12.1.9"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.3",
