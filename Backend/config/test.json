@@ -1,0 +1,6 @@
+{
+    "NODE_ENV": "test",
+    "database": {
+        "url": "mongodb://127.0.0.1/test_database"
+    }
+}

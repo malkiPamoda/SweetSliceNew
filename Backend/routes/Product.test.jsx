@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const { Product } = require('../models/Product');
-const productRoutes = require('../routes/Product');
+const productRoutes = require('./Product');
 const upload = require('../multer-config'); // Mock this if needed
 
 const app = express();

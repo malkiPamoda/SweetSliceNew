@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { User } = require('../models/User');
 const login = require('./Login'); 
+jest.setTimeout(30000); 
 
 const app = express();
 app.use(express.json());

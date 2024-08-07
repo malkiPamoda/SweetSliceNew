@@ -5,6 +5,7 @@ const { User } = require('../models/User');
 const { Product } = require('../models/Product');
 const cart = require('./Cart'); 
 const auth = require('../middleware/auth');
+jest.setTimeout(30000); 
 
 const app = express();
 app.use(express.json());

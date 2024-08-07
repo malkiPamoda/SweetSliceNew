@@ -2,7 +2,7 @@ const request = require('supertest');
 const express = require('express');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const usersRoutes = require('../routes/Users');
+const usersRoutes = require('./Users');
 const { User } = require('../models/User');
 
 const app = express();

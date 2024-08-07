@@ -41,8 +41,8 @@ const Navbar = ({ handleOrderPopup, handleLoginPopup }) => {
               <FaCartShopping className='text-xl text-white drop-shadow-sm cursor-pointer' />
             </button>
             {/* user button */}
-            <button onClick={handleLoginPopup} className='bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white py-1 px-4 rounded-full flex items-center gap-3 group'>
-              <span className='group-hover:block hidden transition-all duration-200'>User</span>
+            <button onClick={handleLoginPopup} className='userbutton bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white py-1 px-4 rounded-full flex items-center gap-3 group'>
+              <span id='loginbutton' className='group-hover:block hidden transition-all duration-200'>User</span>
               <FaUser className='text-xl text-white drop-shadow-sm cursor-pointer' />
             </button>
             {/* dark mode switch */}

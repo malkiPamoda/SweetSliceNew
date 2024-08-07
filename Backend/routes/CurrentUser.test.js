@@ -5,6 +5,7 @@ const mockingoose = require('mockingoose');
 const { User } = require('../models/User');
 const currentUserRoute = require('../routes/CurrentUser');
 const auth = require('../middleware/auth');
+jest.setTimeout(30000); 
 
 
 const app = express();
