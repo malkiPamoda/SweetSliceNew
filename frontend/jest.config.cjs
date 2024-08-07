@@ -8,4 +8,11 @@ module.exports = {
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
   ],
+  reporters: [
+    "default",
+    ["jest-html-reporter", {
+      "pageTitle": "Test Report",
+      "outputPath": "test-report.html"
+    }]
+  ]
 };
